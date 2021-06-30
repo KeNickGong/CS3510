@@ -1,0 +1,226 @@
+\documentclass{article}
+%\usepackage[T1]{fontenc}
+%\usepackage{amssymb, amsmath, graphicx, subfigure, enumerate}
+%\usepackage{amsthm,alltt} 
+\usepackage[margin=1.25in]{geometry} %geometry (sets margin) and other useful packages
+\usepackage{graphicx,ctable,booktabs}
+\usepackage{mathtools}
+\usepackage[boxed]{algorithm2e}
+\usepackage{mathdots}
+\usepackage{fancyhdr} %Fancy-header package to modify header/page numbering
+\usepackage{cleveref}
+
+\setlength{\oddsidemargin}{.25in}
+\setlength{\evensidemargin}{.25in}
+\setlength{\textwidth}{6in}
+\setlength{\topmargin}{-0.4in}
+\setlength{\textheight}{8.5in}
+
+
+
+\newcommand{\heading}[6]{
+  \renewcommand{\thepage}{\arabic{page}} % used to be #1-\arabic{page}
+  \noindent
+  \begin{center}
+  \framebox{
+    \vbox{
+      \hbox to 5.78in { \textbf{#2} \hfill #3 }
+      \vspace{4mm}
+      \hbox to 5.78in { {\Large \hfill #6  \hfill} }
+      \vspace{2mm}
+      \hbox to 5.78in { \textit{{Name: }} }
+    }
+  }
+  \end{center}
+  \vspace*{4mm}
+}
+
+%Redefining sections as problems
+\makeatletter
+\newenvironment{problem}{\@startsection
+       {section}
+       {2}
+       {-.2em}
+       {-3.5ex plus -1ex minus -.2ex}
+       {2.3ex plus .2ex}
+       {\pagebreak[3]%forces pagebreak when space is small; use \eject for better results
+       \large\bf\noindent{Problem }
+       }
+       }
+       %{%\vspace{1ex}\begin{center} \rule{0.3\linewidth}{.3pt}\end{center}}
+       %\begin{center}\large\bf \ldots\ldots\ldots\end{center}}
+\makeatother
+
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{observation}[theorem]{Observation}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{assumption}[theorem]{Assumption}
+
+%\newenvironment{proof}{\noindent{\bf Proof:} \hspace*{1mm}}{
+% \hspace*{\fill} $\Box$ }
+%\newenvironment{proof_of}[1]{\noindent {\bf Proof of #1:}
+% \hspace*{1mm}}{\hspace*{\fill} $\Box$ }
+%\newenvironment{proof_claim}{\begin{quotation} \noindent}{
+% \hspace*{\fill} $\diamond$ \end{quotation}}
+
+\newcommand{\problemset}[3]{\heading{#1}{\classname}{#2}{\studentname}{#3}{Problem Set #1}} % Don't change this line
+%%%%%%%%%%%%%%%%%%%%%%%%%% Change this stuff below, don't change the line above this one
+\newcommand{\problemsetnum}{1}            % problem set number
+\newcommand{\duedate}{Due: Jan. 15, 2018, 8am EST} % problem set deadline
+\newcommand{\studentname}{Student Name: }      % name of student (i.e., you)
+\newcommand{\classname}{Name:   }
+%\newcommand{\instructor}{Prof. Eric Vigoda}
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pagestyle{fancy}
+%\addtolength{\headwidth}{\marginparsep} %these change header-rule width
+%\addtolength{\headwidth}{\marginparwidth}
+\lhead{\classname} %Problem \thesection}
+\chead{} 
+\rhead{\thepage} 
+%\lfoot{\small\scshape \classname}
+%\cfoot{} 
+%\rfoot{\footnotesize PS \#\problemsetnum} 
+\renewcommand{\headrulewidth}{.3pt} 
+\renewcommand{\footrulewidth}{.3pt}
+\setlength\voffset{-0.25in}
+\setlength\textheight{648pt}
+
+
+\newcommand{\sit}{\shortintertext}
+\newcommand\deq{\mathrel{\overset{\makebox[0pt]{\mbox{\normalfont\tiny\sffamily def}}}{=}}}
+\newcommand{\ones}{\mathbbm{1}}
+\newcommand{\e}{\vec{e}}
+\newcommand{\tr}{\text{tr}}
+\newcommand{\bs}{\boldsymbol}
+\mathchardef\mhyphen="2D
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\II}{\mathcal{I}}
+\newcommand{\FF}{\mathcal{F}}
+\newcommand{\X}{\mathcal{X}}
+\newcommand{\Y}{\mathcal{Y}}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\Ra}{\Rightarrow}
+\newcommand{\PP}{\mathbb{P}}
+\newcommand{\sse}{\subseteq}
+\newcommand{\eps}{\epsilon}
+\newcommand{\N}{\mathcal{N}}
+\newcommand{\poly}{\textup{poly}}
+
+\newcommand{\dom}{\textup{dom}}
+
+\renewcommand{\thesubsection}{\thesection.\roman{subsection}}
+
+
+% auto sized delimiters
+\newcommand{\Br}[1]{\left\{#1\right\}}
+\newcommand{\br}[1]{\left[#1\right]}
+\newcommand{\pr}[1]{\left(#1\right)}
+\newcommand{\ceil}[1]{\left\lceil#1\right\rceil}
+\newcommand{\floor}[1]{\left\lfloor#1\right\rfloor}
+\newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\sgn}{\textup{sgn}}
+
+%default delimiter for Pr and E
+\DeclarePairedDelimiter{\defaultDelim}{[}{]}
+
+\DeclareMathOperator{\capPr}{Pr}
+\renewcommand{\Pr}[2][]{\capPr_{#1}\defaultDelim*{#2}}
+\DeclareMathOperator{\capE}{E}
+\newcommand{\E}[2][]{\capE_{#1}\defaultDelim*{#2}}
+\DeclareMathOperator{\capVar}{Var}
+\newcommand{\Var}[2][]{\capVar_{#1}\defaultDelim*{#2}}
+
+\newcommand{\vs}{\vspace{.1in}}
+\newcommand{\vB}{\vspace{.3in}}
+
+%\DeclareMathOperator*{}{} puts subscript below
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+{\bf \noindent Homework 2. \\ Due: Thursday, June 3, 2021 before 11:59PM via Gradescope. Late submission with no penalty by Friday, June 4, 2021 before 11:59AM.}
+
+\begin{problem}{(Repeated element).}
+ 
+%Type your answer here. 
+\underline{Design:}\\
+We will use a binary search approach. The base case is \(\mid A\mid\) = 1 or \(\mid A\mid\) = 2. If \(\mid A\mid\) = 1, simply return 0. If \(\mid A\mid\) = 2, check if the first and second elements are equal. If they are equal, return the element, otherwise return 0.\\
+For the general case, we split the array from the middle, dividing it at index \(\mid A\mid/2\). Then we check the element \(A_{\mid A\mid/2}\) and see if it equals to the element before or after it. If it does equal to one of them, we return this element and the duplicate is found. Otherwise proceed to the next step.\\
+Then we substract the last element in the first half of the array by the first element in the first half of the array and add it by 1.\\
+If this does not equal to the length of the array then we know that the duplicate is in there. So we recursively solve the problem on this subarray. Otherwise we recursively solve the problem on the second half subarray.\\
+\underline{Correctness:}\\
+The base case stops the design from an infinite loop. Our first step ensures that we won't miss the duplicate if it's in the middle.\\
+Then our next step check to see if the duplicate exists in the first half subarray. If there is no duplicate of any number, the length of the array will equal to the last element - the first element + 1 since the array is a continous and increasing collection of natural numbers.\\
+For exmaple:\\
+\[A=\{2,3,4,5,6\}\]
+\[\mid A\mid=6-2+1=5\]
+If a duplicate exists:\\
+\[A=\{2,3,4,5,5,6\}\]
+\[\mid A\mid=7\neq6=7-2+1\]
+This step determines if we need to recursively move to the first or second half, as we determine which half does the duplicate exists.\\
+\underline{Runtime analysis:}\\
+We reduce the input size by half on each recursive call, and comparing two elements and substracting two element are constant time so we do constant amount of work each call. So we got recurrence relation:\\
+\[T(n)=T(n/2)+O(1)\]
+By Master Theorem this gives us \(O(log{n})\) runtime complexity.
+
+
+\end{problem}
+
+
+\newpage
+
+\begin{problem}{(Limited supply of coins).}
+
+%Type your answer here. 	
+(a)\\
+Let \(T[i, j, K=\{k_1,k_2,...,k_n\}]\) be equal to 1 if you can make change for value \(0\leq j\leq V\), using the first \(0\leq i\leq n\) coins with a total of at most \(\sum_{i=1}^{n}k_i,k\geq 0\) coins, or 0 otherwise.\\
+(b)\\
+The recurrence is 
+
+\[T[i,j,K]=max\{T[i-1,j,K],T[i,j-c_i,K_i-1]\}\]
+Which can be intrepreted as follows:\\
+To make change of the given value j we either use the coin of denomination D[i] or we jump to the next denomination by substracting i by 1.
+If we do so, we substract j by \(c_i\) indicating that we use the coin for that much value. Also, we substract K by 1 at entry i indicating that we use the coin and now the coin of that denomination has one less coin.\\
+Here are the base cases:\\
+When \(i=0\), \textbf{return 0} because that means we tried all the denominations and no more denominations are avaliable.\\
+When \(j<0\) \textbf{return 0} because after substracting the denomination it exceed the value and can't be used.\\
+When \(K_i=-1\), \textbf{return} 0 because it has pass the limitation of coins and we don't have that many coins.\\ 
+When \(j=0\) and \(K_i\neq-1\), \textbf{return 1} because we know we successfully make change out of that value and have not exceed the limitation.\\
+(c)\\
+Pseudocode:\\
+\underline{Coin Change(\(i\),\(V\),\(F=\{f_1,f_2,...,f_n\}\))}\\
+IF Helper\((i,V,F)=1\) \\
+RETURN TRUE\\
+ELSE \\
+RETURN FALSE\\
+\underline{Helper(\(i,V,F\))}\\
+IF \(i=0\) RETURN 0\\
+IF \(V<0\) RETURN 0\\
+IF \(F[i]=-1\) RETURN 0\\
+IF \(V=0\) AND \(F[i]\neq-1\) RETURN 1\\
+RETURN MAX(Helper(\(i-1,V,F\)),Helper(\(i,V-D[i],F=\{...,f_i-1,...\}\)))\\
+(d)\\
+This table has a size of \(n \cdot V \) and for each entry we compute \(F[i]\) time at maximum.\\
+Since the worst case in runtime to comput each entry is \(max_i F[i]\) our runtime is:\\
+\[O(n\cdot V\cdot max_i F[i])\]
+
+
+
+\end{problem}
+
+
+
+\end{document}
+
+
+
+

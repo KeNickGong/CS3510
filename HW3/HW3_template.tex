@@ -1,0 +1,219 @@
+\documentclass{article}
+%\usepackage[T1]{fontenc}
+%\usepackage{amssymb, amsmath, graphicx, subfigure, enumerate}
+%\usepackage{amsthm,alltt} 
+\usepackage[margin=1.25in]{geometry} %geometry (sets margin) and other useful packages
+\usepackage{graphicx,ctable,booktabs}
+\usepackage{mathtools}
+\usepackage[boxed]{algorithm2e}
+\usepackage{mathdots}
+\usepackage{fancyhdr} %Fancy-header package to modify header/page numbering
+\usepackage{cleveref}
+
+\setlength{\oddsidemargin}{.25in}
+\setlength{\evensidemargin}{.25in}
+\setlength{\textwidth}{6in}
+\setlength{\topmargin}{-0.4in}
+\setlength{\textheight}{8.5in}
+
+
+
+\newcommand{\heading}[6]{
+  \renewcommand{\thepage}{\arabic{page}} % used to be #1-\arabic{page}
+  \noindent
+  \begin{center}
+  \framebox{
+    \vbox{
+      \hbox to 5.78in { \textbf{#2} \hfill #3 }
+      \vspace{4mm}
+      \hbox to 5.78in { {\Large \hfill #6  \hfill} }
+      \vspace{2mm}
+      \hbox to 5.78in { \textit{{Name: }} }
+    }
+  }
+  \end{center}
+  \vspace*{4mm}
+}
+
+%Redefining sections as problems
+\makeatletter
+\newenvironment{problem}{\@startsection
+       {section}
+       {2}
+       {-.2em}
+       {-3.5ex plus -1ex minus -.2ex}
+       {2.3ex plus .2ex}
+       {\pagebreak[3]%forces pagebreak when space is small; use \eject for better results
+       \large\bf\noindent{Problem }
+       }
+       }
+       %{%\vspace{1ex}\begin{center} \rule{0.3\linewidth}{.3pt}\end{center}}
+       %\begin{center}\large\bf \ldots\ldots\ldots\end{center}}
+\makeatother
+
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{observation}[theorem]{Observation}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{assumption}[theorem]{Assumption}
+
+%\newenvironment{proof}{\noindent{\bf Proof:} \hspace*{1mm}}{
+% \hspace*{\fill} $\Box$ }
+%\newenvironment{proof_of}[1]{\noindent {\bf Proof of #1:}
+% \hspace*{1mm}}{\hspace*{\fill} $\Box$ }
+%\newenvironment{proof_claim}{\begin{quotation} \noindent}{
+% \hspace*{\fill} $\diamond$ \end{quotation}}
+
+\newcommand{\problemset}[3]{\heading{#1}{\classname}{#2}{\studentname}{#3}{Problem Set #1}} % Don't change this line
+%%%%%%%%%%%%%%%%%%%%%%%%%% Change this stuff below, don't change the line above this one
+\newcommand{\problemsetnum}{1}            % problem set number
+\newcommand{\duedate}{Due: Jan. 15, 2018, 8am EST} % problem set deadline
+\newcommand{\studentname}{Student Name: }      % name of student (i.e., you)
+\newcommand{\classname}{Name: Ke Gong  }
+%\newcommand{\instructor}{Prof. Eric Vigoda}
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pagestyle{fancy}
+%\addtolength{\headwidth}{\marginparsep} %these change header-rule width
+%\addtolength{\headwidth}{\marginparwidth}
+\lhead{\classname} %Problem \thesection}
+\chead{} 
+\rhead{\thepage} 
+%\lfoot{\small\scshape \classname}
+%\cfoot{} 
+%\rfoot{\footnotesize PS \#\problemsetnum} 
+\renewcommand{\headrulewidth}{.3pt} 
+\renewcommand{\footrulewidth}{.3pt}
+\setlength\voffset{-0.25in}
+\setlength\textheight{648pt}
+
+
+\newcommand{\sit}{\shortintertext}
+\newcommand\deq{\mathrel{\overset{\makebox[0pt]{\mbox{\normalfont\tiny\sffamily def}}}{=}}}
+\newcommand{\ones}{\mathbbm{1}}
+\newcommand{\e}{\vec{e}}
+\newcommand{\tr}{\text{tr}}
+\newcommand{\bs}{\boldsymbol}
+\mathchardef\mhyphen="2D
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\II}{\mathcal{I}}
+\newcommand{\FF}{\mathcal{F}}
+\newcommand{\X}{\mathcal{X}}
+\newcommand{\Y}{\mathcal{Y}}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\Ra}{\Rightarrow}
+\newcommand{\PP}{\mathbb{P}}
+\newcommand{\sse}{\subseteq}
+\newcommand{\eps}{\epsilon}
+\newcommand{\N}{\mathcal{N}}
+\newcommand{\poly}{\textup{poly}}
+
+\newcommand{\dom}{\textup{dom}}
+
+\renewcommand{\thesubsection}{\thesection.\roman{subsection}}
+
+
+% auto sized delimiters
+\newcommand{\Br}[1]{\left\{#1\right\}}
+\newcommand{\br}[1]{\left[#1\right]}
+\newcommand{\pr}[1]{\left(#1\right)}
+\newcommand{\ceil}[1]{\left\lceil#1\right\rceil}
+\newcommand{\floor}[1]{\left\lfloor#1\right\rfloor}
+\newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\sgn}{\textup{sgn}}
+
+%default delimiter for Pr and E
+\DeclarePairedDelimiter{\defaultDelim}{[}{]}
+
+\DeclareMathOperator{\capPr}{Pr}
+\renewcommand{\Pr}[2][]{\capPr_{#1}\defaultDelim*{#2}}
+\DeclareMathOperator{\capE}{E}
+\newcommand{\E}[2][]{\capE_{#1}\defaultDelim*{#2}}
+\DeclareMathOperator{\capVar}{Var}
+\newcommand{\Var}[2][]{\capVar_{#1}\defaultDelim*{#2}}
+
+\newcommand{\vs}{\vspace{.1in}}
+\newcommand{\vB}{\vspace{.3in}}
+
+%\DeclareMathOperator*{}{} puts subscript below
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+{\bf \noindent Homework 3. \\ Due: Tuesday, June 22, 2021 before 11:59PM via Gradescope. Late submission with no penalty by Wednesday, June 23, 2021 before 11:59AM.}
+
+\begin{problem}{(Computopia).}
+ 
+%Type your answer here. 
+Part 1.\\
+\underline{Graphic Problem:}\\
+Let intersection be the vertices and streets be the edges, we are to design an algorithm to see if there is always a path between every pair of vertices.\\
+\underline{Explanation:}\\
+The problem can be solved in linear time because we only need to run SCCs on the graph one time and SCCs runs in linear time.\\
+If more than 1 strongly connected components exist, then the claim is false because the edges are directed one way between strongly connected components.\\
+Otherwise, if there is only 1 strongly connected component, we know that the graph is cyclic thus all vertices can be reached.
+\\ \hspace*{\fill} \\
+Part 2.\\
+\underline{Graphic Problem:}\\
+Let intersection be the vertices and streets be the edges, we are to design an algorithm given a vertex that returns true if the vertex can reach back taking any possible edges.\\
+\underline{Design:}\\
+1. Consider the given graph and call it G, and call the given vertex v.\\
+2. Run \(SCCs(G)\), retrieve the metagraph G' of the strongly connected components of graph G.\\
+3. Run \(DFS(G'_i)\), which \(G'_i\) are all sets of strongly connected components.\\
+4. If v is visited, run \(Explore(G, v)\), let \(G'_v\) be the SCC that contains v.\\
+5. Return false if any vertex visisted is not in the vertices set of \(G'_v\), otherwise return true.\\
+\underline{Correctness:}\\
+In order to reach back to the townhall node taking any possible edges, the SCC that contains the townhall node must to reach to any other SCC, making it a sink.\\
+To see if the SCC is a sink, simply just do DFS on the SCC and if it reaches to other nodes that's not in the component, we know that the SCC is not a sink.\\
+\underline{Runtime analysis:}\\
+\(SCCs(G), (DFS(G'_i)\) and \(Explore(G, v)\) all have runtime complexity \(O(|V|+|E|)\). While checking if a vertex exist in a set is \(O(1)\) using hashmap.\\
+Thus, the runtime is dominated by \(O(|V|+|E|)\).
+
+
+
+\end{problem}
+
+
+\newpage
+
+\begin{problem}{(red and blue edges).}
+
+%Type your answer here. 	
+Part a.\\
+\underline{Design:}\\
+1. Create new graph \(G'=(V, E')\) which \(E'\) are set of red edges.\\
+2. Run \(Explore(G', v)\) to explore the subroutine in G' starting at v.\\
+3. Return true if u is visited, otherwise if the call ends and u has not been visited, return false.\\
+\underline{Correctnessn:}\\
+If we are looking for only edges that are red, we can ignore blue edges and apply simple exploring subroutine method to find the path.\\
+In this case, if v reaches u successfully in a graph that only contains red edges, we can tell that there must be a pure red path between them, vice versa.\\
+\underline{Runtime analysis:}\\
+Explore Subroutine algorithm runs at \(O(|V|+|E|)\) time complexity so that is our runtime.
+\\ \hspace*{\fill} \\
+Part b.\\
+\underline{Design:}\\
+1. Create new graph \(G_{red}=(V, E_{red})\) and \(G_{blue}=(V, E_{blue})\) which \(E_{red}\)/\(E_{blue}\) are set of red/blue edges.\\
+2. Run \(Explore(G_{red}, v)\) and \(Explore(G_{blue}, u)\). Let visited vertices added in the two explore subroutine calls be \(v_1\) and \(v_2\).\\
+3. Compare \(v_1\) and \(v_2\), if at least one vertex appears in both of the visited set, return true, otherwise return false.\\
+\underline{Correctness:}\\
+Since the blue edges need to be after all red edges in the path, we know that there exist a pure blue path before reaching vertex u, and all the edges before that are red.\\
+The idea is to divide it into two subroutine problems, one starting at v, looking for only red edges, and the other one starting at u, looking for only blue edges.\\
+We know that if such path exists, then the two subroutine must meet each other at some vertex.\\
+Therefore, we look at the two visited vertices set, and their intersection(s) are possible optioins where the red and blue route meet, giving us a legal path.\\
+\underline{Runtime analysis:}\\
+Similarily, Explore Subroutine algorithm runs at \(O(|V|+|E|)\) time complexity so that is our runtime.
+
+
+\end{problem}
+
+
+
+
+\end{document}
